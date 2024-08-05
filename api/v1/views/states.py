@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 from api.v1.views import app_views
 from models.state import State
 from models import storage
@@ -25,4 +26,5 @@ def get_a_state(state_id):
 def del_a_state(state_id):
     """deletes a state of given id
     """
-    storage.delete(
+    storage.delete(storage.get(State, state_id))
+    return jsonify({})
