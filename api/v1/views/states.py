@@ -28,4 +28,13 @@ def del_a_state(state_id):
     """deletes a state of given id
     """
     storage.delete(storage.get(State, state_id))
+    storage.save()
     return jsonify({})
+
+
+@app_views.route('/states',strict_slashes=False)
+def post_a_state():
+    """creates a state
+    """
+    newState = State()
+    
