@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-
+"""Apis that includes all classes
+"""
 from api.v1.views import app_views
 from flask import jsonify
 @app_views.route('/status')

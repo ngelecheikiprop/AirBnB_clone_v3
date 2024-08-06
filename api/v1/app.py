@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-
+"""the application entry point
+"""
 from models import storage
 from api.v1.views import app_views
 from flask import Flask, make_response, jsonify
