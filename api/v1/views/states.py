@@ -48,3 +48,20 @@ def post_a_state():
     new_state = State(**kwargs)
     new_state.save()
     return jsonify(new_state.to_dict()), 201
+
+
+@app_views.route('states/<state_id>',strict_slashes=False, methods=['PUT'])
+def update_a_state(state_id):
+    """updates a state
+    """
+    if not storage.get(State, state_id):
+        abort(404)
+    if not request.json:
+        abort(400, description="Not a JSON")
+    my_state = storage.get(State, state_id)
+    for key, value in request.get_json().items():
+        if key == 'id' or key == 'created_at' or key == 'updated_at':
+            continue
+        my_state.key = value
+    my_state.save()
+    return jsonify(my_state.to_dict()), 200
