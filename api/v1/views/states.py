@@ -29,6 +29,8 @@ def get_a_state(state_id):
 def del_a_state(state_id):
     """deletes a state of given id
     """
+    if not storage.get(State, state_id):
+        abort(404)
     storage.delete(storage.get(State, state_id))
     storage.save()
     return jsonify({})
