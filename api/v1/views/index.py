@@ -4,12 +4,16 @@ from api.v1.views import app_views
 from flask import jsonify
 @app_views.route('/status')
 def status():
+    """retrun status of api
+    """
     from flask import jsonify
     return jsonify({"status":"ok"})
 
 
 @app_views.route('/stats')
 def stats():
+    """get the numbers of each object
+    """
     from models import storage
     from models.amenity import Amenity
     from models.state import State
