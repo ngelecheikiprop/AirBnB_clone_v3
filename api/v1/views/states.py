@@ -44,6 +44,7 @@ def post_a_state():
         abort(400,description="Not a JSON")
     if not 'name'in request.json:
         abort(400, description="Missing name")
+
     kwargs =request.get_json()
     new_state = State(**kwargs)
     new_state.save()
