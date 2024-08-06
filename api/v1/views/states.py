@@ -4,7 +4,7 @@
 from api.v1.views import app_views
 from models.state import State
 from models import storage
-from flask import jsonify,abort
+from flask import jsonify, abort, request
 
 @app_views.route('/states', strict_slashes = False)
 def get_states():
@@ -36,9 +36,15 @@ def del_a_state(state_id):
     return jsonify({}), 200
 
 
-@app_views.route('/states',strict_slashes=False)
+@app_views.route('/states',strict_slashes=False, methods=['POST'])
 def post_a_state():
     """creates a state
     """
-    newState = State()
-    
+    if not request.json:
+        abort(400,description="Not a JSON")
+    if not 'name'in request.json:
+        abort(400, description="Missing name")
+    kwargs =request.get_json()
+    new_state = State(**kwargs)
+    new_state.save()
+    return jsonify(new_state.to_dict()), 201
