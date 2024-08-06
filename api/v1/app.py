@@ -9,11 +9,15 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def tear_down(exception=None):
+    """closes the storage on finish
+    """
     storage.close()
 
 
 @app.errorhandler(404)
 def not_found(error):
+    """hanles errors
+    """
     return make_response(jsonify({'error':'Not found'}), 404)
 if __name__ == "__main__":
     from os import getenv
