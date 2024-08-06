@@ -8,7 +8,7 @@ def status():
     """retrun status of api
     """
     from flask import jsonify
-    return jsonify({"status":"ok"})
+    return jsonify({"status":"OK"})
 
 
 @app_views.route('/stats')
