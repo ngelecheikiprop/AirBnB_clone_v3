@@ -6,14 +6,14 @@ from models.state import State
 from models import storage
 from flask import jsonify, abort, request
 
-@app_views.route('/states', strict_slashes = False, methods=['GET'])
+@app_views.route('/states', strict_slashes=False, methods=['GET'])
 def get_states():
     """gets all states
     """
-    my_dict = {}
+    my_states = []
     for key, value in storage.all(State).items():
-        my_dict[key] = value.to_dict()
-    return jsonify(my_dict)
+        my_states.append(value.to_dict())
+    return jsonify(my_states)
 
 
 @app_views.route('/states/<state_id>', strict_slashes=False, methods=['GET'])
